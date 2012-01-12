@@ -21,7 +21,7 @@ the name of `.vim`, then create a symbolic link to the *rc* files.
 ### Setup on OS X systems
 
 Same as above, the only difference is your home folder on OS X lives
-at `/Users/[username]`).
+at `/Users/[username]`.
 
 ### Setup on Windows systems
 
