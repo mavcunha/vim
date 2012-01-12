@@ -1,3 +1,8 @@
+" automatic runtime management (https://github.com/tpope/vim-pathogen)
+runtime bundle/vim-pathogen/autoload/pathogen.vim 
+call pathogen#infect()
+
+
 syntax on       " detect syn colors
 set modelines=3 " scan 3 lines for vim opts
 set nobackup    " no ~filename around
