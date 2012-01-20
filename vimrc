@@ -2,8 +2,19 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim 
 call pathogen#infect()
 
+syntax on 
 
-syntax on       " detect syn colors
+filetype plugin indent on 
+set ofu=syntaxcomplete#Complete
+
+autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+
+highlight Pmenu      ctermfg=Black ctermbg=Grey 
+highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
+highlight PmenuSbar  ctermfg=Black ctermbg=Grey
+highlight PmenuThumb ctermfg=DarkGrey 
+highlight Search     ctermbg=Yellow
+
 set modelines=3 " scan 3 lines for vim opts
 set nobackup    " no ~filename around
 set ignorecase  " search ignore case
@@ -17,3 +28,4 @@ set showcmd     " show partial command entered
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set incsearch
