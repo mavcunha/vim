@@ -6,8 +6,13 @@ syntax on
 
 filetype plugin indent on 
 set ofu=syntaxcomplete#Complete
+set completeopt=menuone,preview,longest
 
-autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
+
+
+" omnicompletion through Control + Space like most IDEs
+imap <C-space> <C-X><C-O>
 
 highlight Pmenu      ctermfg=Black ctermbg=Grey 
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
@@ -23,6 +28,7 @@ set ruler       " show ruler with filename & cursor position
 set hlsearch    " search is highlighted, nohlsearch do disable
 set cursorline  " set a highlight on the line where the cursor is
 set showcmd     " show partial command entered
+set wildignore+=*.class,*.jar " common ignores 
 
 " editing code feels better with not tabs.
 set tabstop=2
