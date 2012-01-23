@@ -10,6 +10,11 @@ set completeopt=menu,preview,longest
 
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 
+" keep cursor position, ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
 
 " omnicompletion through Control + Space like most IDEs
 imap <C-space> <C-X><C-O>
