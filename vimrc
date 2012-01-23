@@ -6,7 +6,7 @@ syntax on
 
 filetype plugin indent on 
 set ofu=syntaxcomplete#Complete
-set completeopt=menuone,preview,longest
+set completeopt=menu,preview,longest
 
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 
@@ -14,12 +14,17 @@ autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javac
 " omnicompletion through Control + Space like most IDEs
 imap <C-space> <C-X><C-O>
 
+" clear search on return in normal mode
+nnoremap <cr> :nohlsearch<cr> 
+
 highlight Pmenu      ctermfg=Black ctermbg=Grey 
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
 highlight PmenuSbar  ctermfg=Black ctermbg=Grey
 highlight PmenuThumb ctermfg=DarkGrey 
 highlight Search     ctermbg=Yellow
+highlight LineNr     ctermfg=Grey
 
+set number      " always display line numbers
 set modelines=3 " scan 3 lines for vim opts
 set nobackup    " no ~filename around
 set ignorecase  " search ignore case
