@@ -19,6 +19,17 @@ autocmd BufReadPost *
 " omnicompletion through Control + Space like most IDEs
 imap <C-space> <C-X><C-O>
 
+" disable the arrows for fast Vim learning through pain.
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+
+
 " clear search on return in normal mode
 nnoremap <cr> :nohlsearch<cr> 
 
