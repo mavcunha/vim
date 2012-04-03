@@ -29,6 +29,10 @@ inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
 
+" from gary bernhardt - store temp files in a central spot 
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " clear search on return in normal mode
 nnoremap <cr> :nohlsearch<cr> 

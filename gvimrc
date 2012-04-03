@@ -11,3 +11,4 @@ highlight PmenuSbar  guifg=Black guibg=Grey
 highlight PmenuThumb guifg=DarkGrey 
 highlight Search     guibg=Yellow
 highlight LineNr     guifg=Grey
+highlight Normal     guifg=White
