@@ -8,6 +8,7 @@ filetype plugin indent on
 set ofu=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
+" omnicompletion for java files.
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 
 " keep cursor position, ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
