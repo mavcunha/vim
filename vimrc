@@ -3,18 +3,18 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 syntax on 
+filetype plugin indent on
 
-filetype plugin indent on 
+
 set ofu=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 set wildignore+=_site/** " avoid command-t to list _site folder in Jekyll projects.
 
-" omnicompletion for java files.
+let java_allow_cpp_keywords=1 " don't highlight as Errors valid keywords in Java
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 
 " originally .md if for modula2, I use for markdown format.
 au BufNewFile,BufRead *.md set filetype=markdown   
-
 " keep cursor position, ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -23,7 +23,6 @@ autocmd BufReadPost *
 
 " omnicompletion through Control + Space like most IDEs
 imap <C-space> <C-X><C-O>
-
 
 " from gary bernhardt, tab or completion 
 function! InsertTabWrapper()
