@@ -11,6 +11,9 @@ set completeopt=menu,preview,longest
 " omnicompletion for java files.
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 
+" originally .md if for modula2, I use for markdown format.
+au BufNewFile,BufRead *.md set filetype=markdown   
+
 " keep cursor position, ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
