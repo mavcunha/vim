@@ -7,6 +7,7 @@ syntax on
 filetype plugin indent on 
 set ofu=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
+set wildignore+=_site/** " avoid command-t to list _site folder in Jekyll projects.
 
 " omnicompletion for java files.
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
