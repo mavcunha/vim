@@ -25,21 +25,28 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set wildignore+=*.class,*.jar " Java artifact
 set wildignore+=_site/** " Jekyll artifact
 
+set laststatus=2 " always show statusline even on sigle window
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
 " editing feels better with no tabs
 set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" OmniCompletion settings
 set ofu=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
+
+" clear search on return in normal mode
+nnoremap <cr> :nohlsearch<cr> 
 
 " omnicompletion through Control + Space like most IDEs
 imap <C-space> <C-X><C-O> 
 
-" don't highlight as Errors valid keywords in Java,
 " this is a fix for a bad default in Java syntax file
 let java_allow_cpp_keywords=1 
 
+" enable OmniCompletion for java files.
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 
 " originally .md is for modula2, I use for markdown format
@@ -52,6 +59,9 @@ autocmd BufReadPost *
   \ endif
 
 " from gary bernhardt, tab or completion 
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
 function! InsertTabWrapper()
     let col = col('.') - 1
     if !col || getline('.')[col - 1] !~ '\k'
@@ -60,13 +70,10 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
 
 " from gary bernhardt, rename file
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>n :call RenameFile()<cr>
+
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -76,9 +83,15 @@ function! RenameFile()
         redraw!
     endif
 endfunction
-map <leader>n :call RenameFile()<cr>
 
-" disable the arrows for fast Vim learning
+" run current test
+map <leader>a :call RunCurrentTestFile(expand('%'))<cr>
+function! RunCurrentTestFile(filename)
+  :w
+  exec ":!clear && tput cup 1000 0; bundle exec rspec " . a:filename
+endfunction
+
+" disable the arrows for Vim learning
 noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
@@ -87,9 +100,6 @@ inoremap <Up> <nop>
 inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
-
-" clear search on return in normal mode
-nnoremap <cr> :nohlsearch<cr> 
 
 highlight Pmenu      ctermfg=Black ctermbg=Grey 
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
