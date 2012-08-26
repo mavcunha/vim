@@ -88,7 +88,7 @@ endfunction
 map <leader>a :call RunCurrentTestFile(expand('%'))<cr>
 function! RunCurrentTestFile(filename)
   :w
-  exec ":!clear && tput cup 1000 0; bundle exec rspec " . a:filename
+  exec ":!clear && tput cup 1000 0; bundle exec rspec --color " . a:filename
 endfunction
 
 " disable the arrows for Vim learning
