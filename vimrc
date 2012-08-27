@@ -85,12 +85,31 @@ function! RenameFile()
     endif
 endfunction
 
-" run current test
-map <leader>a :call RunCurrentTestFile(expand('%'))<cr>
-function! RunCurrentTestFile(filename)
-  :w
-  exec ":!clear && tput cup 1000 0; bundle exec rspec --color " . a:filename
+" run rails tests 
+map <leader>a :call RunTest(expand('%'))<cr>
+function! RunTest(filename)
+  :wa
+  exec ":!clear && tput cup 1000 0; bundle exec rspec --color " . TestTarget(a:filename)
 endfunction
+
+function! TestTarget(filename)
+  if match(a:filename, '\(.feature\|_spec.rb\)$') != -1
+    let t:mvaltas_test_target=a:filename
+    return a:filename
+  else
+    return LastTest()
+  end
+endfunction
+
+function! LastTest() 
+  if !exists('t:mvaltas_test_target')
+    return 'spec/' 
+  else
+    return t:mvaltas_test_target
+  end
+endfunction
+
+
 
 " disable the arrows for Vim learning
 noremap <Up> <nop>
