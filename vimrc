@@ -34,6 +34,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+set scrolloff=6 " leave some room when jumping
+
 " OmniCompletion settings
 set ofu=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
@@ -89,7 +91,7 @@ endfunction
 map <leader>a :call RunTest(expand('%'))<cr>
 function! RunTest(filename)
   :wa
-  exec ":!clear && tput cup 1000 0; bundle exec rspec --color " . TestTarget(a:filename)
+  exec ":!clear && tput cup 1000 0; rspec --color " . TestTarget(a:filename)
 endfunction
 
 function! TestTarget(filename)
