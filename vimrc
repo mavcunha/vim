@@ -16,6 +16,9 @@ set hlsearch    " search is highlighted, nohlsearch do disable
 set cursorline  " set a highlight on the line where the cursor is
 set showcmd     " show partial command entered
 
+" proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
+set backspace=eol,start,indent
+
 " from gary bernhardt - store temp files in a central spot 
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
