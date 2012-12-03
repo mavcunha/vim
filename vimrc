@@ -15,6 +15,7 @@ set ruler       " show ruler with filename & cursor position
 set hlsearch    " search is highlighted, nohlsearch do disable
 set cursorline  " set a highlight on the line where the cursor is
 set showcmd     " show partial command entered
+set cryptmethod=blowfish " when using :X use blowfish to encrypt the file.
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
