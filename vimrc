@@ -29,6 +29,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set wildignore+=*.class,*.jar " Java artifact
 set wildignore+=_site/** " Jekyll artifact
 set wildignore+=tmp/**,log/** " rails working directories
+set wildignore+=vendor/** " where gems usually get installed
 
 set laststatus=2 " always show statusline even on sigle window
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
