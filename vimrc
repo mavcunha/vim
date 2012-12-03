@@ -72,10 +72,12 @@ inoremap <s-tab> <c-n>
 
 function! InsertTabWrapper()
     let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
+    if col && getline('.')[col - 1] == '='
+      return "> "
+    elseif !col || getline('.')[col - 1] !~ '\k'
+      return "\<tab>"
     else
-        return "\<c-p>"
+      return "\<c-p>"
     endif
 endfunction
 
@@ -96,7 +98,11 @@ endfunction
 map <leader>a :call RunTest(expand('%'))<cr>
 function! RunTest(filename)
   :wa
-  exec ":!clear && tput cup 1000 0; rspec --color " . TestTarget(a:filename)
+  ClearScreenAndExecute(" rspec --color " . TestTarget(a:filename))
+endfunction
+
+function! ClearScreenAndExecute(runthis)
+  exec ':!clear && tput cup 1000 0;' . a:runthis
 endfunction
 
 function! TestTarget(filename)
