@@ -60,6 +60,9 @@ autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javac
 " originally .md is for modula2, I use for markdown format
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 
+" Default to Perl6 instead of Perl5 filetype
+autocmd BufNewfile,BufRead *.t,*.pm,*.pl set filetype=perl6
+
 " keep cursor position, ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
