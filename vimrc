@@ -86,7 +86,6 @@ endfunction
 
 " from gary bernhardt, rename file
 map <leader>n :call RenameFile()<cr>
-
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -97,37 +96,12 @@ function! RenameFile()
     endif
 endfunction
 
-" run rails tests 
-map <leader>a :call RunTest(expand('%'))<cr>
-function! RunTest(filename)
+function! CSE(runthis)
   :wa
-  ClearScreenAndExecute(" rspec --color " . TestTarget(a:filename))
-endfunction
-
-function! ClearScreenAndExecute(runthis)
   exec ':!clear && tput cup 1000 0;' . a:runthis
 endfunction
 
-function! TestTarget(filename)
-  if match(a:filename, '\(.feature\|_spec.rb\)$') != -1
-    let t:mvaltas_test_target=a:filename
-    return a:filename
-  else
-    return LastTest()
-  end
-endfunction
-
-function! LastTest() 
-  if !exists('t:mvaltas_test_target')
-    return 'spec/' 
-  else
-    return t:mvaltas_test_target
-  end
-endfunction
-
-
-
-" disable the arrows for Vim learning
+" disabling arrows, force Vim movement learning
 noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
