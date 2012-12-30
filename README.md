@@ -28,3 +28,9 @@ at `/Users/[username]`.
 You should be able to create a [NTFS symbolic
 link](http://en.wikipedia.org/wiki/NTFS_symbolic_link) to your home
 folder. 
+
+### Note to self: Adding new modules...
+
+    git submodule add http://github.com/author/module.git bundle/module
+    git add .
+    git commit 
