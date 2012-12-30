@@ -96,9 +96,9 @@ function! RenameFile()
     endif
 endfunction
 
-function! CSE(runthis)
+function! CSE(runthis, ...)
   :wa
-  exec ':!clear && tput cup 1000 0;' . a:runthis
+  exec ':!clear && tput cup 1000 0;' . a:runthis . ' ' . join(a:000, ' ')
 endfunction
 
 " disabling arrows, force Vim movement learning
