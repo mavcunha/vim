@@ -6,16 +6,16 @@ syntax on
 filetype plugin indent on
 
 set textwidth=80
-set ignorecase
-set incsearch
-set smartcase
+set incsearch   " show search results as I type.
+set ignorecase  " ignore case on searches...
+set smartcase   " ...but if I start with uppercase, obey it.
 set number      " always display line numbers
 set modelines=3 " scan 3 lines for vim opts
 set ruler       " show ruler with filename & cursor position
 set hlsearch    " search is highlighted, nohlsearch do disable
 set cursorline  " set a highlight on the line where the cursor is
 set showcmd     " show partial command entered
-set cryptmethod=blowfish " when using :X use blowfish to encrypt the file.
+set visualbell  " no beeps when I make a mistakes
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
@@ -46,13 +46,13 @@ set ofu=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
 " clear search on return in normal mode
-nnoremap <cr> :nohlsearch<cr> 
+nnoremap <cr> :nohlsearch<cr>
 
 " omnicompletion through Control + Space like most IDEs
-imap <C-space> <C-X><C-O> 
+imap <C-space> <C-X><C-O>
 
 " this is a fix for a bad default in Java syntax file
-let java_allow_cpp_keywords=1 
+let java_allow_cpp_keywords=1
 
 " enable OmniCompletion for java files.
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
@@ -102,14 +102,20 @@ function! CSE(runthis, ...)
 endfunction
 
 " disabling arrows, force Vim movement learning
-noremap <Up> <nop>
-noremap <Down> <nop>
-noremap <Left> <nop>
-noremap <Right> <nop>
-inoremap <Up> <nop>
-inoremap <Down> <nop>
-inoremap <Left> <nop>
-inoremap <Right> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" hardmode, disable hjkl
+noremap h <NOP>
+noremap j <NOP>
+noremap k <NOP>
+noremap l <NOP>
 
 highlight Pmenu      ctermfg=Black ctermbg=Grey 
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
