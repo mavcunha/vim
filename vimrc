@@ -96,6 +96,9 @@ function! RenameFile()
     endif
 endfunction
 
+" CSE means Clear Screen and Execute, use it by
+" mapping (depending of the project) to a test runner command
+" map <leader>r CSE('rspec', '--color')<cr>
 function! CSE(runthis, ...)
   :wa
   exec ':!clear && tput cup 1000 0;' . a:runthis . ' ' . join(a:000, ' ')
