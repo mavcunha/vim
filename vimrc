@@ -48,8 +48,10 @@ set completeopt=menu,preview,longest
 " clear search on return in normal mode
 nnoremap <cr> :nohlsearch<cr>
 
-" omnicompletion through Control + Space like most IDEs
-imap <C-space> <C-X><C-O>
+" clear search on return in normal mode...
+nnoremap <cr> :nohlsearch<cr>
+" ...but don't do it for quickfix window.
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " this is a fix for a bad default in Java syntax file
 let java_allow_cpp_keywords=1
