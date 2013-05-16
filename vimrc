@@ -45,8 +45,9 @@ set scrolloff=6 " leave some room when jumping
 set ofu=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
-" clear search on return in normal mode
-nnoremap <cr> :nohlsearch<cr>
+" fixing delay on vim startup by setting correct ruby_path
+" http://stackoverflow.com/a/12141458/1426043
+let g:ruby_path = system('rvm current') 
 
 " clear search on return in normal mode...
 nnoremap <cr> :nohlsearch<cr>
