@@ -117,12 +117,6 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" hardmode, disable hjkl
-noremap h <NOP>
-noremap j <NOP>
-noremap k <NOP>
-noremap l <NOP>
-
 highlight Pmenu      ctermfg=Black ctermbg=Grey 
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
 highlight PmenuSbar  ctermfg=Black ctermbg=Grey
