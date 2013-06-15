@@ -120,6 +120,7 @@ inoremap <right> <nop>
 highlight Pmenu      ctermfg=Black ctermbg=Grey 
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
 highlight PmenuSbar  ctermfg=Black ctermbg=Grey
-highlight PmenuThumb ctermfg=DarkGrey 
-highlight Search     ctermbg=Yellow
+highlight PmenuThumb ctermfg=DarkGrey
+highlight Search     ctermfg=Black ctermbg=Yellow cterm=NONE
+highlight IncSearch  ctermfg=Blue ctermbg=White
 highlight LineNr     ctermfg=Grey
