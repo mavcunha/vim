@@ -21,12 +21,14 @@ set visualbell  " no beeps when I make a mistakes
 set backspace=eol,start,indent
 
 " from gary bernhardt - store temp files in a central spot 
+" first dir found is used.
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " ignoring some files in search (also Command-T respect this setting)
 set wildignore+=*.class,*.jar " Java artifact
+set wildignore+=target/** " Maven artifacts
 set wildignore+=_site/** " Jekyll artifact
 set wildignore+=tmp/**,log/** " rails working directories
 set wildignore+=vendor/** " where gems usually get installed
@@ -34,7 +36,7 @@ set wildignore+=vendor/** " where gems usually get installed
 set laststatus=2 " always show statusline even on sigle window
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
-" editing feels better with no tabs
+" no tabs, expand them to 2 spaces
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -55,6 +57,7 @@ nnoremap <cr> :nohlsearch<cr>
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " this is a fix for a bad default in Java syntax file
+" which highlights C++ keywords as errors
 let java_allow_cpp_keywords=1
 
 " enable OmniCompletion for java files.
@@ -93,9 +96,10 @@ function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
     if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
+      :w!
+      exec ':saveas ' . new_name
+      exec ':silent !rm ' . old_name
+      redraw!
     endif
 endfunction
 
@@ -107,7 +111,7 @@ function! CSE(runthis, ...)
   exec ':!clear && tput cup 1000 0;' . a:runthis . ' ' . join(a:000, ' ')
 endfunction
 
-" disabling arrows, force Vim movement learning
+" arrows disabled on insert and normal mode
 noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
@@ -117,10 +121,10 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-highlight Pmenu      ctermfg=Black ctermbg=Grey 
-highlight PmenuSel   ctermfg=Black ctermbg=Yellow 
-highlight PmenuSbar  ctermfg=Black ctermbg=Grey
+highlight Pmenu      ctermfg=Black ctermbg=LightGrey
+highlight PmenuSel   ctermfg=Black ctermbg=Yellow
+highlight PmenuSbar  ctermfg=Black ctermbg=LightGrey
 highlight PmenuThumb ctermfg=DarkGrey
-highlight Search     ctermfg=Black ctermbg=Yellow cterm=NONE
+highlight Search     ctermfg=Black ctermbg=Yellow
 highlight IncSearch  ctermfg=Blue ctermbg=White
 highlight LineNr     ctermfg=Grey
