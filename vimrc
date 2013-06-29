@@ -60,9 +60,6 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 " which highlights C++ keywords as errors
 let java_allow_cpp_keywords=1
 
-" enable OmniCompletion for java files.
-autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
-
 " originally .md is for modula2, I use for markdown format
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 
