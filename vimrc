@@ -5,7 +5,6 @@ call pathogen#infect()
 syntax on 
 filetype plugin indent on
 
-set textwidth=80
 set incsearch   " show search results as I type.
 set ignorecase  " ignore case on searches...
 set smartcase   " ...but if I start with uppercase, obey it.
@@ -41,7 +40,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-set scrolloff=6 " leave some room when jumping
+" leave some room when jumping
+set scrolloff=6 
 
 " OmniCompletion settings
 set omnifunc=syntaxcomplete#Complete
