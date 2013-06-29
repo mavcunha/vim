@@ -44,7 +44,7 @@ set expandtab
 set scrolloff=6 " leave some room when jumping
 
 " OmniCompletion settings
-set ofu=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
 " fixing delay on vim startup by setting correct ruby_path
