@@ -52,9 +52,14 @@ set completeopt=menu,preview,longest
 let g:ruby_path = system('rvm current') 
 
 " clear search on return in normal mode...
-nnoremap <cr> :nohlsearch<cr>
-" ...but don't do it for quickfix window.
+function MapCR()
+  nnoremap <cr> :nohlsearch<cr>
+endfunction
+call MapCR()
+" ... but not for command and quickfix windows
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+autocmd CmdwinEnter * nnoremap <cr> <cr>
+autocmd CmdwinLeave * call MapCR()
 
 " this is a fix for a bad default in Java syntax file
 " which highlights C++ keywords as errors
