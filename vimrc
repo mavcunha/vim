@@ -15,6 +15,7 @@ set hlsearch    " search is highlighted, nohlsearch do disable
 set cursorline  " set a highlight on the line where the cursor is
 set showcmd     " show partial command entered
 set visualbell  " no beeps when I make a mistakes
+set background=dark " need bright colors since terminal backgroun is black
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
@@ -64,6 +65,9 @@ autocmd CmdwinLeave * call MapCR()
 " this is a fix for a bad default in Java syntax file
 " which highlights C++ keywords as errors
 let java_allow_cpp_keywords=1
+
+" Force write when open readonly files
+command SudoWrite :w !sudo tee %
 
 " originally .md is for modula2, I use for markdown format
 autocmd BufNewFile,BufRead *.md set filetype=markdown
