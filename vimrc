@@ -20,6 +20,10 @@ set background=dark " need bright colors since terminal backgroun is black
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
 
+" window width size, don't squeeze too much
+set winwidth=50
+set winminwidth=50
+
 " from gary bernhardt - store temp files in a central spot 
 " first dir found is used.
 set backup
@@ -53,7 +57,7 @@ set completeopt=menu,preview,longest
 let g:ruby_path = system('rvm current') 
 
 " clear search on return in normal mode...
-function MapCR()
+function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
 endfunction
 call MapCR()
@@ -67,7 +71,7 @@ autocmd CmdwinLeave * call MapCR()
 let java_allow_cpp_keywords=1
 
 " Force write when open readonly files
-command SudoWrite :w !sudo tee %
+command! SudoWrite :w !sudo tee %
 
 " originally .md is for modula2, I use for markdown format
 autocmd BufNewFile,BufRead *.md set filetype=markdown
