@@ -25,3 +25,6 @@
 [submodule "bundle/vim-matchit"]
 	path = bundle/vim-matchit
 	url = https://github.com/tsaleh/vim-matchit.git
+[submodule "bundle/scala.vim"]
+	path = bundle/scala.vim
+	url = https://github.com/zhaoyao/scala.vim.git
