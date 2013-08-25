@@ -136,6 +136,6 @@ highlight PmenuSel   ctermfg=Black ctermbg=Yellow
 highlight PmenuSbar  ctermfg=Black ctermbg=LightGrey
 highlight PmenuThumb ctermfg=DarkGrey
 highlight Visual     ctermfg=Black ctermbg=White cterm=NONE
-highlight Search     ctermfg=Black ctermbg=Yellow
+highlight Search     ctermfg=White ctermbg=Magenta
 highlight IncSearch  ctermfg=Blue ctermbg=White
 highlight LineNr     ctermfg=Grey
