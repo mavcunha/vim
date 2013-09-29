@@ -56,6 +56,9 @@ set completeopt=menu,preview,longest
 " http://stackoverflow.com/a/12141458/1426043
 let g:ruby_path = system('rvm current') 
 
+" save files when suspending with CTRL-Z
+map <C-z> :wa\|:suspend<cr>
+
 " clear search on return in normal mode...
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
