@@ -52,10 +52,6 @@ set scrolloff=6
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
-" fixing delay on vim startup by setting correct ruby_path
-" http://stackoverflow.com/a/12141458/1426043
-let g:ruby_path = system('rvm current') 
-
 " save files when suspending with CTRL-Z
 map <C-z> :wa\|:suspend<cr>
 
