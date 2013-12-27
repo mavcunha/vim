@@ -139,11 +139,7 @@ endfunction
 function! FindWithWildignore()
   let excluding=""
   for entry in split(&wildignore,",")
-    if match(entry,'*/*')
-      let excluding.= " ! -ipath \'" . entry . "\' "
-    else
-      let excluding.= " ! -iname \'" . entry . "\' "
-    endif
+    let excluding.= (match(entry,'*/*') ? " ! -ipath \'" : " ! -iname \'") . entry . "\' "
   endfor
   return "find * -type f \\\( " . excluding . " \\\)"
 endfunction
