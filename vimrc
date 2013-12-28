@@ -121,10 +121,10 @@ function! CSE(runthis, ...)
 endfunction
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
-" command. See usage below.
-function! SelectaCommand(choice_command, selecta_args, vim_command)
+" command.
+function! SelectaCommand(choice_command)
   try
-    silent let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+    silent let selection = system(a:choice_command . " | selecta ")
   catch /Vim:Interrupt/
     " Swallow the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen
@@ -132,7 +132,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
     return
   endtry
   redraw!
-  exec a:vim_command . " " . selection
+  return selection
 endfunction
 
 " Creates a find command ignoring paths and files set in wildignore
@@ -144,9 +144,21 @@ function! FindWithWildignore()
   return "find * -type f \\\( " . excluding . " \\\)"
 endfunction
 
-" Find all files in all non-dot directories starting in the working directory.
-" Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaCommand(FindWithWildignore(), "", ":e")<cr>
+" A google search command which returns only the links found
+function! GoogleSearchLinks(search)
+ return "googlesearch " . a:search ." | jq '.items[].link' | tr -d '\"' "
+endfunction
+
+" Request user input and search google filtered by selecta
+function! SearchGoogleSelecta()
+  call inputsave()
+  let search = input("Search Google for: ")
+  call inputrestore()
+  execute "normal a" . substitute(SelectaCommand(GoogleSearchLinks(search)), '\n$', '', '')
+endfunction
+
+nnoremap <leader>t :exec ":e " SelectaCommand(FindWithWildignore())<cr>
+nnoremap <leader>e :call SearchGoogleSelecta()<cr>
 
 " arrows disabled on insert and normal mode
 noremap <up> <nop>
