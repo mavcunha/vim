@@ -129,7 +129,7 @@ function! SelectaCommand(choice_command)
     " Swallow the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen
     redraw!
-    return
+    return ""
   endtry
   redraw!
   return selection
@@ -144,21 +144,20 @@ function! FindWithWildignore()
   return "find * -type f \\\( " . excluding . " \\\)"
 endfunction
 
-" A google search command which returns only the links found
-function! GoogleSearchLinks(search)
- return "googlesearch " . a:search ." | jq '.items[].link' | tr -d '\"' "
-endfunction
-
 " Request user input and search google filtered by selecta
 function! SearchGoogleSelecta()
   call inputsave()
   let search = input("Search Google for: ")
   call inputrestore()
-  execute "normal a" . substitute(SelectaCommand(GoogleSearchLinks(search)), '\n$', '', '')
+  let search_cmd = "googlesearch " . search ." | jq '.items[].link' | tr -d '\"' "
+  return substitute(SelectaCommand(search_cmd), '\n$', '', '')
 endfunction
 
+" Command-T style file selection using selecta
 nnoremap <leader>t :exec ":e " SelectaCommand(FindWithWildignore())<cr>
-nnoremap <leader>e :call SearchGoogleSelecta()<cr>
+
+" search google for links and filter results through selecta
+imap <c-l> <c-r>=SearchGoogleSelecta()<cr>
 
 " arrows disabled on insert and normal mode
 noremap <up> <nop>
