@@ -1,8 +1,8 @@
 " automatic runtime management (https://github.com/tpope/vim-pathogen)
-runtime bundle/vim-pathogen/autoload/pathogen.vim 
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-syntax on 
+syntax on
 filetype plugin indent on
 
 set incsearch   " show search results as I type.
@@ -15,7 +15,9 @@ set hlsearch    " search is highlighted, nohlsearch do disable
 set cursorline  " set a highlight on the line where the cursor is
 set showcmd     " show partial command entered
 set visualbell  " no beeps when I make a mistakes
-set background=dark " need bright colors since terminal backgroun is black
+set background=dark " need bright colors since terminal background is black
+set hidden       " don't bug me with modified buffers when switching
+set switchbuf=useopen " if buffer is opened focus on it
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
@@ -24,7 +26,7 @@ set backspace=eol,start,indent
 set winwidth=50
 set winminwidth=50
 
-" from gary bernhardt - store temp files in a central spot 
+" from gary bernhardt - store temp files in a central spot
 " first dir found is used.
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -46,7 +48,7 @@ set shiftwidth=2
 set expandtab
 
 " leave some room when jumping
-set scrolloff=6 
+set scrolloff=6
 
 " OmniCompletion settings
 set omnifunc=syntaxcomplete#Complete
@@ -54,6 +56,22 @@ set completeopt=menu,preview,longest
 
 " save files when suspending with CTRL-Z
 map <C-z> :wa\|:suspend<cr>
+
+" quick switch between alternate buffer
+nnoremap <leader><leader> <c-^>
+
+" Command-T style file selection using selecta
+nnoremap <leader>t :exec ":e " SelectaCommand(FindWithWildignore())<cr>
+
+" search google for links and filter results through selecta
+inoremap <c-l> <c-r>=SearchGoogleSelecta()<cr>
+
+" from gary bernhardt, tab or completion
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" rename current file
+nnoremap <leader>n :call RenameFile()<cr>
 
 " clear search on return in normal mode...
 function! MapCR()
@@ -84,10 +102,6 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 
-" from gary bernhardt, tab or completion 
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
 function! InsertTabWrapper()
     let col = col('.') - 1
     if col && getline('.')[col - 1] == '='
@@ -100,7 +114,6 @@ function! InsertTabWrapper()
 endfunction
 
 " from gary bernhardt, rename file
-map <leader>n :call RenameFile()<cr>
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -153,12 +166,6 @@ function! SearchGoogleSelecta()
   return substitute(SelectaCommand(search_cmd), '\n$', '', '')
 endfunction
 
-" Command-T style file selection using selecta
-nnoremap <leader>t :exec ":e " SelectaCommand(FindWithWildignore())<cr>
-
-" search google for links and filter results through selecta
-imap <c-l> <c-r>=SearchGoogleSelecta()<cr>
-
 " arrows disabled on insert and normal mode
 noremap <up> <nop>
 noremap <down> <nop>
@@ -169,6 +176,7 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+" some color changes
 highlight Pmenu      ctermfg=Black ctermbg=LightGrey
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow
 highlight PmenuSbar  ctermfg=Black ctermbg=LightGrey
