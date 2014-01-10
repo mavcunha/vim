@@ -1,9 +1,6 @@
 ### Vim Configurations
 
-Just a convenient way to keep my `vim` configurations available. You can
-get ideas from it if you want to. I encourage you to fork or create
-one repository to yourself it doesn't make much sense pull request
-it.
+Just a convenient way to keep my `vim` configurations available.
 
 Below is how I setup my configurations in different systems, read the
 [manual on initialization of
@@ -16,7 +13,6 @@ Download the repository on your home folder (`/home/[username]`) under
 the name of `.vim`, then create a symbolic link to the *rc* files.
 
     $ ln -s .vim/vimrc ~/.vimrc
-    $ ln -s .vim/gvimrc ~/.gvimrc
 
 ### Setup on OS X systems
 

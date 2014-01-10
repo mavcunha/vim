@@ -62,6 +62,7 @@ nnoremap <leader><leader> <c-^>
 
 " Command-T style file selection using selecta
 nnoremap <leader>t :exec ":e " SelectaCommand(FindWithWildignore())<cr>
+nnoremap <leader>b :exec ":e " SelectaCommand(ListActiveBuffers())<cr>
 
 " search google for links and filter results through selecta
 inoremap <c-l> <c-r>=SearchGoogleSelecta()<cr>
@@ -146,6 +147,18 @@ function! SelectaCommand(choice_command)
   endtry
   redraw!
   return selection
+endfunction
+
+" Creates an input (list of) of active buffers to be
+" filtered by Selecta
+function! ListActiveBuffers()
+  let bufferlist = []
+  for l:bni in range(bufnr("$"), 1, -1)
+    if buflisted(l:bni)
+      call add(bufferlist, bufname(l:bni))
+    endif
+  endfor
+  return "echo ".join(bufferlist, ' ')." | tr ' ' '\\n' "
 endfunction
 
 " Creates a find command ignoring paths and files set in wildignore
