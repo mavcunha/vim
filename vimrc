@@ -19,6 +19,7 @@ set background=dark " need bright colors since terminal background is black
 set hidden       " don't bug me with modified buffers when switching
 set switchbuf=useopen " if buffer is opened focus on it
 set textwidth=80 " keep the text wraped to 80 characters a line
+set nowrap       " when vertical split wrapping looks bad
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
@@ -97,6 +98,9 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " Default to Perl6 instead of Perl5 filetype
 autocmd BufNewfile,BufRead *.t,*.pm,*.pl set filetype=perl6
+
+" Turn spell on for git commits
+autocmd FileType gitcommit set spell
 
 " keep cursor position, ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
 autocmd BufReadPost *
