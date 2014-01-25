@@ -56,6 +56,10 @@ set scrolloff=6
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
+" highlight trailing white spaces
+highlight link ExtraWhiteSpace Error
+match ExtraWhiteSpace /\s\+$/
+
 " save files when suspending with CTRL-Z
 map <C-z> :wa\|:suspend<cr>
 
