@@ -133,6 +133,7 @@ function! RenameFile()
       :w!
       exec ':saveas ' . new_name
       exec ':silent !rm ' . old_name
+      exec ':silent bwipe ' . old_name
       redraw!
     endif
 endfunction
