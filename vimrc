@@ -56,9 +56,11 @@ set scrolloff=6
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
-" highlight trailing white spaces
+" highlight trailing whitespaces
 highlight link ExtraWhiteSpace Error
 match ExtraWhiteSpace /\s\+$/
+" remove all trailing whitespace violations
+nnoremap <leader>w :%s/\s\+$//<bar>normal <C-o><cr>
 
 " save files when suspending with CTRL-Z
 map <C-z> :wa\|:suspend<cr>
