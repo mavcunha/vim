@@ -18,7 +18,6 @@ set visualbell  " no beeps when I make a mistakes
 set background=dark " need bright colors since terminal background is black
 set hidden       " don't bug me with modified buffers when switching
 set switchbuf=useopen " if buffer is opened focus on it
-set textwidth=80 " keep the text wraped to 80 characters a line
 set nowrap       " when vertical split wrapping looks bad
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
