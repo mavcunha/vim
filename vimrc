@@ -55,9 +55,6 @@ set scrolloff=6
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
-" highlight trailing whitespaces
-highlight link ExtraWhiteSpace Error
-match ExtraWhiteSpace /\s\+$/
 " remove all trailing whitespace violations
 nnoremap <leader>w :%s/\s\+$//<bar>normal <C-o><cr>
 
@@ -81,16 +78,6 @@ inoremap <s-tab> <c-n>
 " rename current file
 nnoremap <leader>n :call RenameFile()<cr>
 
-" clear search on return in normal mode...
-function! MapCR()
-  nnoremap <cr> :nohlsearch<cr>
-endfunction
-call MapCR()
-" ... but not for command and quickfix windows
-autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-autocmd CmdwinEnter * nnoremap <cr> <cr>
-autocmd CmdwinLeave * call MapCR()
-
 " this is a fix for a bad default in Java syntax file
 " which highlights C++ keywords as errors
 let java_allow_cpp_keywords=1
@@ -98,20 +85,39 @@ let java_allow_cpp_keywords=1
 " Force write when open readonly files
 command! SudoWrite :w !sudo tee %
 
-" originally .md is for modula2, I use for markdown format
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+" custom auto commands
+augroup customAutocmd
+  " clear auto commands in this group
+  autocmd!
 
-" Default to Perl6 instead of Perl5 filetype
-autocmd BufNewfile,BufRead *.t,*.pm,*.pl set filetype=perl6
+  " Do not use return to clear search on command
+  " and quickfix windows.
+  autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+  autocmd CmdwinEnter * nnoremap <cr> <cr>
+  autocmd CmdwinLeave * call MapCR()
 
-" Turn spell on for git commits
-autocmd FileType gitcommit set spell
+  " originally .md is for modula2, I use for markdown format
+  autocmd BufNewFile,BufRead *.md set filetype=markdown
 
-" keep cursor position, ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
+  " Default to Perl6 instead of Perl5 filetype
+  autocmd BufNewfile,BufRead *.t,*.pm,*.pl set filetype=perl6
+
+  " Turn spell on for git commits
+  autocmd FileType gitcommit set spell
+
+  " keep cursor position,
+  " ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+augroup END
+
+" clear search on return in normal mode...
+function! MapCR()
+  nnoremap <cr> :nohlsearch<cr>
+endfunction
+call MapCR()
 
 function! InsertTabWrapper()
     let col = col('.') - 1
@@ -200,6 +206,9 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+" highlight trailing whitespaces
+highlight link ExtraWhiteSpace Error
+match ExtraWhiteSpace /\s\+$/
 " some color changes
 highlight Pmenu      ctermfg=Black ctermbg=LightGrey
 highlight PmenuSel   ctermfg=Black ctermbg=Yellow
