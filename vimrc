@@ -48,42 +48,40 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-" leave some room when jumping
-set scrolloff=6
+set scrolloff=6 " leave some room when jumping
 
 " OmniCompletion settings
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
-
-" remove all trailing whitespace violations
-nnoremap <leader>w :%s/\s\+$//<bar>normal <C-o><cr>
 
 " save files when suspending with CTRL-Z
 map <C-z> :wa\|:suspend<cr>
 
 " quick switch between alternate buffer
 nnoremap <leader><leader> <c-^>
-
+" rename current file
+nnoremap <leader>n :call RenameFile()<cr>
+" remove all trailing whitespace violations
+nnoremap <leader>w :%s/\s\+$//<bar>normal <C-o><cr>
 " Command-T style file selection using selecta
 nnoremap <leader>t :exec ":e " SelectaCommand(FindWithWildignore())<cr>
 nnoremap <leader>b :exec ":e " SelectaCommand(ListActiveBuffers())<cr>
 
 " search google for links and filter results through selecta
 inoremap <c-l> <c-r>=SearchGoogleSelecta()<cr>
-
 " from gary bernhardt, tab or completion
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
-
-" rename current file
-nnoremap <leader>n :call RenameFile()<cr>
 
 " this is a fix for a bad default in Java syntax file
 " which highlights C++ keywords as errors
 let java_allow_cpp_keywords=1
 
 " Force write when open readonly files
-command! SudoWrite :w !sudo tee %
+command! -nargs=0 SudoWrite :w !sudo tee %
+
+" Set current buffer as a rspec target to be run by CSE
+command! -nargs=0 RSpecThis call SetRSpecTarget(@%)
 
 " custom auto commands
 augroup customAutocmd
@@ -149,6 +147,11 @@ endfunction
 function! CSE(runthis, ...)
   :wa
   exec ':!clear && tput cup 1000 0;' . a:runthis . ' ' . join(a:000, ' ')
+endfunction
+
+" Sets a file to be run with CSE by rspec on map <leader>r
+function! SetRSpecTarget(file)
+  exec "map <leader>r :call CSE('bundle exec rspec " . a:file . "')<cr>"
 endfunction
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
