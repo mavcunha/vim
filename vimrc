@@ -122,6 +122,17 @@ function! LoadRainbowParentheses()
   RainbowParenthesesLoadBraces
 endfunction
 
+function! ClojureLive()
+  echom "Clojure Live Mode"
+  if !filereadable('./.nrepl-port')
+    echom "nREPL not running."
+  else
+    let nrepl_port = join(readfile("./.nrepl-port"),"\n")
+    echom "Connecting..."
+    exec "Connect nrepl://localhost:" . nrepl_port . " " . getcwd()
+  endif
+endfunction
+
 " clear search on return in normal mode...
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
