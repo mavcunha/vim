@@ -103,6 +103,9 @@ augroup customAutocmd
   " Turn spell on for git commits
   autocmd FileType gitcommit set spell
 
+  " Color ()[]{} on clojure files
+  autocmd Filetype clojure call LoadRainbowParentheses()
+
   " keep cursor position,
   " ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
   autocmd BufReadPost *
@@ -110,6 +113,14 @@ augroup customAutocmd
     \   exe "normal g`\"" |
     \ endif
 augroup END
+
+" Make (){}[] colorful
+function! LoadRainbowParentheses()
+  RainbowParenthesesToggle
+  RainbowParenthesesLoadRound
+  RainbowParenthesesLoadSquare
+  RainbowParenthesesLoadBraces
+endfunction
 
 " clear search on return in normal mode...
 function! MapCR()
