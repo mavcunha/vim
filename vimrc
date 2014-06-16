@@ -54,6 +54,9 @@ set scrolloff=6 " leave some room when jumping
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menu,preview,longest
 
+" Exuberant ctags + git templates
+set tags=.git/tags
+
 " save files when suspending with CTRL-Z
 map <C-z> :wa\|:suspend<cr>
 
