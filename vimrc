@@ -110,13 +110,13 @@ augroup customAutocmd
   autocmd BufNewFile,BufRead *.md set filetype=markdown
 
   " Default to Perl6 instead of Perl5 filetype
-  autocmd BufNewfile,BufRead *.t,*.pm,*.pl set filetype=perl6
+  autocmd BufNewFile,BufRead *.t,*.pm,*.pl set filetype=perl6
+
+  " Color ()[]{} on clojure files
+  autocmd FileType clojure call LoadRainbowParentheses()
 
   " Turn spell on for git commits
   autocmd FileType gitcommit set spell
-
-  " Color ()[]{} on clojure files
-  autocmd Filetype clojure call LoadRainbowParentheses()
 
   " keep cursor position,
   " ref: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc line 87
@@ -128,21 +128,21 @@ augroup END
 
 " Make (){}[] colorful, from rainbow_parentheses plugin
 function! LoadRainbowParentheses()
-  RainbowParenthesesActivate
   RainbowParenthesesLoadRound
   RainbowParenthesesLoadSquare
   RainbowParenthesesLoadBraces
+  RainbowParenthesesActivate
 endfunction
 
 " Connects to a REPL inspecting .nrepl-port
-" uses fireplace.vim plugin
+" uses fireplace.vim
 function! ClojureLive()
   echom "Clojure Live Mode"
   let port_file = "./.nrepl-port"
   if !filereadable(port_file)
-    echom "nREPL not running."
+    echom "nREPL not running, use :StartRepl"
   else
-    let nrepl_port = join(readfile("./.nrepl-port"),"\n")
+    let nrepl_port = join(readfile(port_file),"\n")
     echom "Connecting..."
     exec "Connect nrepl://localhost:" . nrepl_port . " " . getcwd()
   endif
