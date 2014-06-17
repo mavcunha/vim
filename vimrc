@@ -33,7 +33,7 @@ set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" ignoring some files in search (also Command-T respect this setting)
+" ignoring some files in search
 set wildignore+=*.class,*.jar " Java artifact
 set wildignore+=target/** " Maven artifacts
 set wildignore+=_site/** " Jekyll artifact
@@ -60,6 +60,10 @@ set tags=.git/tags
 " save files when suspending with CTRL-Z
 map <C-z> :wa\|:suspend<cr>
 
+" Edit vimrc and reload it, from Derek Wyatt
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
 " quick switch between alternate buffer
 nnoremap <leader><leader> <c-^>
 " rename current file
@@ -81,13 +85,15 @@ inoremap <s-tab> <c-n>
 let java_allow_cpp_keywords=1
 
 " Force write when open readonly files
-command! -nargs=0 SudoWrite :w !sudo tee %
+command! SudoWrite :w !sudo tee %
 
 " Set current buffer as a rspec target to be run by CSE
-command! -nargs=0 RSpecThis call SetRSpecTarget(@%)
+command! RSpecThis call SetRSpecTarget(@%)
 
 " Connect to running REPL
-command! -nargs=0 ClojureLive call ClojureLive()
+command! ClojureLive call ClojureLive()
+" Start a REPL, uses tpope/dispatch plugin
+command! StartRepl exec "Start! lein repl"
 
 " custom auto commands
 augroup customAutocmd
@@ -120,7 +126,7 @@ augroup customAutocmd
     \ endif
 augroup END
 
-" Make (){}[] colorful
+" Make (){}[] colorful, from rainbow_parentheses plugin
 function! LoadRainbowParentheses()
   RainbowParenthesesActivate
   RainbowParenthesesLoadRound
@@ -129,6 +135,7 @@ function! LoadRainbowParentheses()
 endfunction
 
 " Connects to a REPL inspecting .nrepl-port
+" uses fireplace.vim plugin
 function! ClojureLive()
   echom "Clojure Live Mode"
   let port_file = "./.nrepl-port"
@@ -141,7 +148,7 @@ function! ClojureLive()
   endif
 endfunction
 
-" clear search on return in normal mode...
+" clear search when hit 'return' in normal mode
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
 endfunction
