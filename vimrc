@@ -83,6 +83,9 @@ command! -nargs=0 SudoWrite :w !sudo tee %
 " Set current buffer as a rspec target to be run by CSE
 command! -nargs=0 RSpecThis call SetRSpecTarget(@%)
 
+" Connect to running REPL
+command! -nargs=0 ClojureLive call ClojureLive()
+
 " custom auto commands
 augroup customAutocmd
   " clear auto commands in this group
@@ -116,15 +119,17 @@ augroup END
 
 " Make (){}[] colorful
 function! LoadRainbowParentheses()
-  RainbowParenthesesToggle
+  RainbowParenthesesActivate
   RainbowParenthesesLoadRound
   RainbowParenthesesLoadSquare
   RainbowParenthesesLoadBraces
 endfunction
 
+" Connects to a REPL inspecting .nrepl-port
 function! ClojureLive()
   echom "Clojure Live Mode"
-  if !filereadable('./.nrepl-port')
+  let port_file = "./.nrepl-port"
+  if !filereadable(port_file)
     echom "nREPL not running."
   else
     let nrepl_port = join(readfile("./.nrepl-port"),"\n")
