@@ -137,10 +137,9 @@ endfunction
 " Connects to a REPL inspecting .nrepl-port
 " uses fireplace.vim
 function! ClojureLive()
-  echom "Clojure Live Mode"
   let port_file = "./.nrepl-port"
   if !filereadable(port_file)
-    echom "nREPL not running, use :StartRepl"
+    echoerr "nREPL not running, use :StartRepl"
   else
     let nrepl_port = join(readfile(port_file),"\n")
     echom "Connecting..."
