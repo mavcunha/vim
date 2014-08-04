@@ -235,6 +235,11 @@ function! SearchGoogleSelecta()
   return substitute(SelectaCommand(search_cmd), '\n$', '', '')
 endfunction
 
+" OSX QuickLook file
+function! QuickLookThis(file)
+  exec "!qlmanage -p ". a:file . " &> /dev/null "
+endfunction
+
 " arrows disabled on insert and normal mode
 noremap <up> <nop>
 noremap <down> <nop>
