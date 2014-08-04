@@ -240,6 +240,14 @@ function! QuickLookThis(file)
   exec "!qlmanage -p ". a:file . " &> /dev/null "
 endfunction
 
+" Run and Preview, this function just helps
+" when editing lilypond, LaTex or other which
+" creates files visible through QuickLook
+function! RunAndPreview(runthis, file)
+  call CSE(a:runthis)
+  call QuickLookThis(a:file)
+endfunction
+
 " arrows disabled on insert and normal mode
 noremap <up> <nop>
 noremap <down> <nop>
