@@ -84,6 +84,9 @@ inoremap <s-tab> <c-n>
 " which highlights C++ keywords as errors
 let java_allow_cpp_keywords=1
 
+" tell sh.vim that every shell file is a bash file
+let g:is_bash=1
+
 " Force write when open readonly files
 command! SudoWrite :w !sudo tee %
 
