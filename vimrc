@@ -19,6 +19,7 @@ set background=dark " need bright colors since terminal background is black
 set hidden      " don't bug me with modified buffers when switching
 set switchbuf=useopen " if buffer is opened focus on it
 set wrap        " wrap by default
+set shell=bash\ -l " use login shell for :shell, loads aliases and stuff
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
