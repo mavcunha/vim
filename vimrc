@@ -24,10 +24,6 @@ set shell=bash\ -l " use login shell for :shell, loads aliases and stuff
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
 
-" window width size, don't squeeze too much
-set winwidth=50
-set winminwidth=50
-
 " from gary bernhardt - store temp files in a central spot
 " first dir found is used.
 set backup
