@@ -197,7 +197,7 @@ endfunction
 " command.
 function! SelectaCommand(choice_command)
   try
-    silent let selection = system(a:choice_command . " | selecta ")
+    let selection = system(a:choice_command . " | selecta ")
   catch /Vim:Interrupt/
     " Swallow the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen
