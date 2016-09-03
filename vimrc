@@ -90,6 +90,9 @@ command! SudoWrite :w !sudo tee %
 " Set current buffer as a rspec target to be run by CSE
 command! RSpecThis call SetRSpecTarget(@%)
 
+" Set CSE to whatever...
+command! -nargs=* QuickCSE call QuickCSE(<q-args>)
+
 " Connect to running REPL
 command! ClojureLive call ClojureLive()
 " Start a REPL, uses tpope/dispatch plugin
@@ -188,6 +191,11 @@ endfunction
 " Sets a file to be run with CSE by rspec on map <leader>r
 function! SetRSpecTarget(file)
   exec "map <leader>r :call CSE('bundle exec rspec " . a:file . "')<cr>"
+endfunction
+
+" Quick CSE
+function! QuickCSE(cmd)
+  exec "map <leader>r :call CSE(". a:cmd .")<cr>"
 endfunction
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
