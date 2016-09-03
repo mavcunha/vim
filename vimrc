@@ -195,7 +195,7 @@ endfunction
 
 " Quick CSE
 function! QuickCSE(cmd)
-  exec "map <leader>r :call CSE(". a:cmd .")<cr>"
+  exec "map <leader>r :call CSE(\"". a:cmd ."\")<cr>"
 endfunction
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
