@@ -19,7 +19,6 @@ set background=dark " need bright colors since terminal background is black
 set hidden      " don't bug me with modified buffers when switching
 set switchbuf=useopen " if buffer is opened focus on it
 set wrap        " wrap by default
-set shell=bash\ -l " use login shell for :shell, loads aliases and stuff
 
 " proper behavior of DEL, BS, CTLR-w; otherwise you can't BS after an ESC
 set backspace=eol,start,indent
@@ -67,12 +66,14 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>n :call RenameFile()<cr>
 " remove all trailing whitespace violations
 nnoremap <leader>w :%s/\s\+$//<bar>normal <C-o><cr>
-" Command-T style file selection using selecta
+
+" File selection using selecta
 nnoremap <leader>t :exec ":e " SelectaCommand(FindWithWildignore())<cr>
 nnoremap <leader>b :exec ":e " SelectaCommand(ListActiveBuffers())<cr>
 
 " search google for links and filter results through selecta
 inoremap <c-l> <c-r>=SearchGoogleSelecta()<cr>
+
 " from gary bernhardt, tab or completion
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
