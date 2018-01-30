@@ -29,12 +29,14 @@ set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" ignoring some files in search
+" ignoring some files in selecta search
 set wildignore+=*.class,*.jar " Java artifact
 set wildignore+=target/** " Maven artifacts
 set wildignore+=_site/** " Jekyll artifact
 set wildignore+=tmp/**,log/** " rails working directories
 set wildignore+=vendor/** " where gems usually get installed
+set wildignore+=node_modules/** " Just too many files on node
+set wildignore+=jspm_packages/** " Same as above...
 
 set laststatus=2 " always show statusline even on sigle window
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
@@ -128,6 +130,25 @@ augroup customAutocmd
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
+augroup END
+
+" Keybase - saltpack
+augroup SALTPACK
+  au!
+  " Make sure nothing is written to ~/.viminfo
+  au BufReadPre,FileReadPre *.saltpack set viminfo=
+  " No other files with unencrypted info
+  au BufReadPre,FileReadPre *.saltpack set noswapfile noundofile nobackup
+
+  " Reading Files, assumes you can decrypt
+  " STDERR redirect to get rid of "message authored by"
+  au BufReadPost,FileReadPost *.saltpack :%!keybase decrypt 2> /dev/null
+
+  " Writing requires users
+  au BufWritePre,FileReadPre *.saltpack let b:usernames = get(b:, 'usernames', 'mvaltas' )
+
+  au BufWritePre,FileReadPre *.saltpack :exec "%!keybase encrypt " . b:usernames
+  au BufWritePost,FileReadPost *.saltpack u
 augroup END
 
 " Make (){}[] colorful, from rainbow_parentheses plugin
@@ -255,6 +276,7 @@ endfunction
 function! RunAndPreview(runthis, file)
   call CSE(a:runthis)
   call QuickLookThis(a:file)
+  redraw! " executing with :silent
 endfunction
 
 " arrows disabled on insert and normal mode
